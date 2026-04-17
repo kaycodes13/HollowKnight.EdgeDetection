@@ -53,6 +53,7 @@
   <ItemGroup>
     <None Include="README.md" />
 	<None Include="preview.png" />
+	<None Include="ModDependencies.txt" />
 	<EmbeddedResource Include="Assets/**/*" />
 	<EmbeddedResource Include="Languages/**/*" />
     <Compile Remove="Shaders/*" />
