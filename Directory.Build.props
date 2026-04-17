@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+  <AssemblyTitle>EdgeDetection</AssemblyTitle>
+  <Version>0.1.0</Version>
+  <Authors>kaycodes13</Authors>
+  <Description>An accessibility mod for Hollow Knight that adds customizable edge detection to things that are important for gameplay.</Description>
+  <RepositoryUrl>https://github.com/kaycodes13/HollowKnight.EdgeDetection</RepositoryUrl>
+  </PropertyGroup>
+</Project>

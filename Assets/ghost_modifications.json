@@ -1,0 +1,46 @@
+{
+  "ChangeLayer": {
+    "low health hit": "PLAYER",
+    "Scr Heads": "HERO_ATTACK",
+    "Q Mega": "HERO_ATTACK",
+    "Cyclone Slash": "HERO_ATTACK",
+    "Shader": "PLAYER"
+  },
+  "ChangeAllLayers": {
+    "Vignette": "PARTICLE",
+    "Brumm_shield": "PARTICLE"
+  },
+  "HideViaLayer": [
+    "HeroLight",
+    "Hero_Spotlight",
+    "white_light_donut",
+    "white_light_donut2",
+    "Dash Burst",
+    "SD Bling",
+    "SD Trail",
+    "SD Sharp Flash",
+    "Wall Hit Effect",
+    "SD Burst",
+    "Soul Burst",
+    "Wall Puff",
+    "SD Burst Glow",
+    "White Flash NA",
+    "White Flash DJ",
+    "Hit Crack",
+    "Shadow Ring",
+    "Q Flash Slam",
+    "Q Flash Start",
+    "Q Slam",
+    "Scr Base",
+    "Q Trail",
+    "Q Slam Lines",
+    "Q Slam",
+    "Q Pillar",
+    "Q1 Pillar",
+    "Rage Burst Effect",
+    "white_fader",
+    "double health hit spark",
+    "Dream Impact",
+    "Death Crack"
+  ]
+}

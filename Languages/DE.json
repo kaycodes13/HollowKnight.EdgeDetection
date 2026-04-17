@@ -1,0 +1,12 @@
+﻿{
+	"MOD_TITLE": "Randkennung",
+	"TERRAIN_NAME": "Gelände/Interaktiv",
+	"HAZARD_NAME": "Gefahr",
+	"PLAYER_NAME": "Spieler",
+
+	"LINE_COLOUR_LABEL": "Farbe",
+	"LINE_WIDTH_LABEL": "Breite",
+
+	"HALF_RES_LABEL": "Niedrige Auflösung",
+	"HALF_RES_DESC": "Kann die Leistung leicht verbessern."
+}

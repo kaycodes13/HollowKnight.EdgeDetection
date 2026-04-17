@@ -1,0 +1,59 @@
+{
+  "ChangeLayer": {
+    "Geo Small": "INTERACTIVE_OBJECT",
+    "Geo Med": "INTERACTIVE_OBJECT",
+    "Geo Large": "INTERACTIVE_OBJECT",
+    "acid_bubbles": "ENEMIES",
+    "AcidWater": "ENEMIES",
+    "bone_spike": "ENEMIES",
+    "centipede_pit_FG": "ENEMIES",
+    "centipede_pit0000": "ENEMIES",
+    "Pigeon": "ENEMIES",
+    "Enemy_spike01": "ENEMIES",
+    "Enemy_spike02": "ENEMIES",
+    "Enemy_spike03": "ENEMIES",
+    "fungd_spikes_09_FG": "ENEMIES",
+    "fungd_spikes": "ENEMIES",
+    "fungd_spike_sil": "ENEMIES",
+    "hive_charm_spikes_0000": "ENEMIES",
+    "hive_charm_spikes_0002": "ENEMIES"
+  },
+  "ChangeAllLayers": {
+    "Arrow Prompt New": "PARTICLE",
+    "Spa Region": "PARTICLE",
+    "Hard Land Effect": "PARTICLE",
+    "Death Explode Boss": "PARTICLE",
+    "Death Puff Boss": "PARTICLE",
+    "Mouth Swarm": "ENEMIES"
+  },
+  "HideViaLayer": [
+    "haze2",
+    "haze4",
+    "fog",
+    "steam",
+    "water_fog",
+    "ruins_fog",
+    "msk_generic_soft",
+    "mask_beam",
+    "dream_beam",
+    "HeroLight",
+    "hot_spring_layers_0033_water_glow",
+    "fungus_blue_fog",
+    "mantis_detail_0018_a",
+    "deep_branches_0004_deep_branch",
+    "deep_web_curved",
+    "deep_nest_webs_0000_Layer-1",
+    "deep_web",
+    "plat_lifts_0003_a",
+    "Hit Crack",
+    "Sharp Flash"
+  ],
+  "HideFromDetectors": [
+    "cut_web",
+    "cut_web fat",
+    "cut_web triangle"
+  ],
+  "VisualizeSprite": {
+    "RestBench": "INTERACTIVE_OBJECT"
+  }
+}
