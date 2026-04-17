@@ -17,10 +17,10 @@ A clear and concise description of what you expected to happen.
 Please add screenshots to help explain your problem.
 
 **Log File**
-Please copy and paste the contents of your `BepInEx/LogOutput.log` file into the spoiler block below.
+Please copy and paste the contents of your `ModLog.txt` file into the spoiler block below.
 
 <details>
-<summary>LogOutput.log</summary>
+<summary>ModLog.txt</summary>
 
 PASTE THE LOG FILE HERE
 </details>
