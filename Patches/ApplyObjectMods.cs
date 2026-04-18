@@ -37,7 +37,6 @@ internal static class ApplyObjectMods {
 		}
 	}
 
-	// TODO: not catching "Death Puff Boss" on the no particles pass :/
 	static GameObject ObjectSpawnHook(GameObject result) {
 		foreach (Transform t in Utils.SelfAndWalkHierarchy(result)) {
 			if (ObjectVisualizer.IsVisualizer(t))
@@ -68,7 +67,6 @@ internal static class ApplyObjectMods {
 			}
 		}
 	}
-
 
 	#endregion
 	#region Internals

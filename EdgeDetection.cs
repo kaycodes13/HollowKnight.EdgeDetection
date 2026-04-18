@@ -55,8 +55,8 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 
 		Log("Applying hooks...");
 		Localization.Patch();
-		CameraSetup.Patch();
 		ApplyObjectMods.Patch();
+		CameraSetup.Patch();
 
 		Log("Initialized!");
 	}

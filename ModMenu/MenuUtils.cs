@@ -10,7 +10,7 @@ internal static class MenuUtils {
 	internal static GameObject UIGameObject(string name, GameObject? parent) {
 		GameObject go = new(name) { layer = (int)PhysLayers.UGUI };
 		if (parent)
-			go.transform.SetParentReset(parent.transform);
+			go.transform.SetParentReset(parent!.transform);
 		return go;
 	}
 
