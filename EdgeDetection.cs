@@ -45,6 +45,9 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 
 	public EdgeDetection() : base("Edge Detection") {
 		Inst = this;
+#if DEBUG
+		Log("--- This is a local build ---");
+#endif
 
 		Log("Loading assets...");
 		Utils.ReadAsset($"shader.bundle", stream => {

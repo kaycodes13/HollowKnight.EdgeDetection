@@ -15,6 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
+      # when you're ready to release the mod, change this to 'true'
       allow-release: 'true'
       version: ${{ steps.version.outputs.version }}
       is-new-version: ${{ !fromJSON(steps.needs-release.outputs.exists || 'true') }}
@@ -29,6 +30,8 @@ jobs:
         uses: BadMagic100/setup-hk@v3
         with:
           apiPath: API
+          # if the mod has dependencies, change this to the path to
+          # your ModDependencies.txt and uncomment it
           dependencyFilePath: ./ModDependencies.txt
 
       - name: Setup .NET
@@ -74,7 +77,7 @@ jobs:
     needs:
       - build
     runs-on: ubuntu-latest
-    # only make a release if we manually request the build - other builds will be handled automatically with a push
+    # only make a release if the version has changed and releases are allowed above
     if: github.event_name == 'push' && needs.build.outputs.allow-release == 'true' && needs.build.outputs.is-new-version == 'true'
 
     steps:
