@@ -15,10 +15,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.version.outputs.version }}
-      attestation-url: ${{ steps.attest.outputs.attestation-url }}
       allow-release: 'true'
+      version: ${{ steps.version.outputs.version }}
       is-new-version: ${{ !fromJSON(steps.needs-release.outputs.exists || 'true') }}
+      attestation-url: ${{ steps.attest.outputs.attestation-url }}
+      build-artifact-id: ${{ steps.build-artifact.outputs.artifact-id }}
 
     steps:
       - name: Checkout
@@ -47,10 +48,11 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Prepare artifacts for release
+        id: build-artifact
         uses: actions/upload-artifact@v7
         with:
-          name: Publish
-          path: bin/Publish
+          path: bin/Publish/*.zip
+          archive: false
 
       - name: Check if release needed
         id: needs-release
@@ -79,7 +81,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v8
         with:
-          name: Publish
+          artifact-ids: ${{ needs.build.outputs.build-artifact-id }}
           path: artifacts/Publish
           skip-decompress: true
 
