@@ -33,31 +33,24 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 	#endregion
 
 	/// <summary>
-	/// Renders objects as a black/white mask.
-	/// </summary>
-	internal static Shader SilhouetteShader { get; private set; }
-
-	/// <summary>
 	/// Renders laplacian edge detection on black/white masks, then can be
 	/// used to composite the edges only onto another texture.
 	/// </summary>
-	internal static Shader EdgeDetectionShader { get; private set; }
+	internal static Shader EdgeDetectionShader { get; private set; } = null!;
 
 	/// <summary>
 	/// Definitions for all edge detection passes which should be performed, in order.
 	/// </summary>
-	internal static PassDef[] PassDefs { get; private set; }
-		= Utils.ReadJsonAsset<PassDef[]>($"pass_definitions.json");
+	internal static readonly PassDef[] PassDefs = Utils.ReadJsonAsset<PassDef[]>($"pass_definitions.json");
 
 	public EdgeDetection() : base("Edge Detection") {
 		Inst = this;
 
 		Log("Loading assets...");
-		Utils.ReadAsset($"shaders.bundle", stream => {
+		Utils.ReadAsset($"shader.bundle", stream => {
 			AssetBundle bundle = AssetBundle.LoadFromStream(stream);
-			SilhouetteShader = bundle.LoadAsset<Shader>("assets/drawsilhouette.shader");
 			EdgeDetectionShader = bundle.LoadAsset<Shader>("assets/edgedetection.shader");
-			bundle.Unload(false);
+			bundle.Unload(unloadAllLoadedObjects: false);
 		});
 
 		Log("Applying hooks...");
@@ -182,4 +175,3 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 
 	#endregion
 }
-

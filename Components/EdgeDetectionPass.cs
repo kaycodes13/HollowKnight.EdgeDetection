@@ -1,5 +1,4 @@
 ﻿using GlobalEnums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -113,7 +112,7 @@ public class EdgeDetectionPass : MonoBehaviour {
 	/// <summary>Maximum outline width.</summary>
 	internal const byte WIDTH_MAX = 16;
 
-	Material silMat, edgeMat;
+	Material edgeMat;
 	Camera mainCam, detectorCam;
 
 	static readonly int
@@ -123,8 +122,9 @@ public class EdgeDetectionPass : MonoBehaviour {
 		subtractTexID = Shader.PropertyToID("_SubtractTex");
 
 	const int
-		DETECT_PASS = 0,
-		COMPOSITE_PASS = 1;
+		SILHOUETTE_PASS = 0,
+		DETECT_PASS = 1,
+		COMPOSITE_PASS = 2;
 
 	void Start() {
 		if (!Passes.ContainsKey(Id))
@@ -143,12 +143,10 @@ public class EdgeDetectionPass : MonoBehaviour {
 		camGo.AddComponent<EdgeDetector>().Settings = this;
 
 		edgeMat = new Material(EdgeDetectionShader);
-		silMat = new Material(SilhouetteShader);
 	}
 
 	void OnDestroy() {
 		DestroyImmediate(detectorCam.gameObject);
-		DestroyImmediate(silMat);
 		DestroyImmediate(edgeMat);
 		Passes.Remove(Id);
 	}
@@ -206,8 +204,8 @@ public class EdgeDetectionPass : MonoBehaviour {
 		detectorCam.targetTexture = tx;
 		detectorCam.Render();
 
-		silMat.SetFloat(thresholdID, AlphaThreshold);
-		Graphics.Blit(tx, output, silMat);
+		edgeMat.SetFloat(thresholdID, AlphaThreshold);
+		Graphics.Blit(tx, output, edgeMat, SILHOUETTE_PASS);
 
 		detectorCam.targetTexture = null;
 		RenderTexture.ReleaseTemporary(tx);
