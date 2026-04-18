@@ -29,7 +29,7 @@ jobs:
       - name: Setup MAPI
         uses: BadMagic100/setup-hk@v3
         with:
-          apiPath: API
+          apiPath: ../API
           # if the mod has dependencies, change this to the path to
           # your ModDependencies.txt and uncomment it
           dependencyFilePath: ./ModDependencies.txt
