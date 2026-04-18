@@ -2,7 +2,7 @@
 
 An accessibility mod for Hollow Knight that adds customizable edge detection to things that are important for gameplay.
 
-![Screenshot of King's Pass with clear edge detection on the Terrain, the Knight, and two Crawlids.](https://raw.githubusercontent.com/kaycodes13/HollowKnight.EdgeDetection/refs/heads/main/preview.png)
+![Screenshot of King's Pass with bright outlines around the Terrain, the Knight, and two Crawlids.](https://raw.githubusercontent.com/kaycodes13/HollowKnight.EdgeDetection/refs/heads/main/preview.png)
 
 Each layer can have its line thickness and colour changed individually. The lines are not affected by the game's brightness or other graphics settings.
 
@@ -12,7 +12,7 @@ Many regular rooms have been tested and the entire game should be playable, but 
 
 ## Installation
 
-Install via [Lumafly mod manager](https://themulhima.github.io/Lumafly/). This mod's one dependency, [Satchel](https://github.com/TheMulhima/Satchel/), should be installed automatically.
+Install with [Lumafly mod manager](https://themulhima.github.io/Lumafly/). This mod's one dependency, [Satchel](https://github.com/TheMulhima/Satchel/), should be installed automatically.
 
 ## Special Thanks to...
 
