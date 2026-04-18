@@ -9,14 +9,14 @@
 		<Copyright>Copyright © $(Authors) 2026</Copyright>
 		<NoWarn>7035</NoWarn>
 		<Deterministic>false</Deterministic>
-		<OutputPath>bin\$(Configuration)\</OutputPath>
+		<OutputPath>bin/$(Configuration)/</OutputPath>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<EnableNETAnalyzers>True</EnableNETAnalyzers>
 		<AnalysisMode>recommended</AnalysisMode>
 
-		<HollowKnightRefs>..\API</HollowKnightRefs>
-		<ExportDir>bin\Publish</ExportDir>
+		<HollowKnightRefs>../API</HollowKnightRefs>
+		<ExportDir>bin/Publish</ExportDir>
 
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<NeutralLanguage>EN</NeutralLanguage>
@@ -40,12 +40,12 @@
 	</ItemGroup>
 
 	<!-- Mod Dependencies -->
-	<ItemGroup Condition="Exists('$(HollowKnightRefs)')">
+	<ItemGroup>
 		<Reference Private="false" Include="$(HollowKnightRefs)/Mods/Satchel/Satchel.dll"/>
 	</ItemGroup>
 
 	<!-- Modding API & Game References -->
-	<ItemGroup Condition="Exists('$(HollowKnightRefs)')">
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Unity.Analyzers" Version="1.26.0" PrivateAssets="all" />
 
 		<Reference
