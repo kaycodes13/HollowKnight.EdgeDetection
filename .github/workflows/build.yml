@@ -64,8 +64,7 @@ jobs:
         if: github.event_name == 'push' && steps.needs-release.outputs.exists == 'false'
         uses: actions/attest@v4
         with:
-          name: Publish
-          subject-path: bin/Publish/EdgeDetection.zip
+          subject-path: bin/Publish/*.zip
 
   # Publish to GitHub releases to keep release history on the repository (needed for this workflow to work properly
   # but is also nice for multiple other reasons such as auto-tagging *after* a build success)
@@ -94,4 +93,4 @@ jobs:
           body: |
             Build attested at ${{ needs.build.outputs.attestation-url }}
           files: |
-            artifacts/Publish/EdgeDetection.zip
+            artifacts/Publish/*.zip
