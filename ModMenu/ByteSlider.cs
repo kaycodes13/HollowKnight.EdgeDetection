@@ -34,8 +34,9 @@ internal class ByteSlider : CustomSlider {
 		// fixing the width and position so it matches the other controls
 
 		slider.gameObject.SetSizeDelta(new Vector2(260, 22));
+		slider.gameObject.SetAnchors(new Vector2(0.5f, 0.75f));
 
-		label.gameObject.RectTransform.anchoredPosition = new Vector2(-328, 0);
+		label.transform.AsRect.anchoredPosition = new Vector2(-328, 0);
 
 		valueLabel.gameObject.SetAnchors(new Vector2(1, 0.5f));
 		valueLabel.transform.AsRect.anchoredPosition = new Vector2(30, 0);
@@ -50,7 +51,6 @@ internal class ByteSlider : CustomSlider {
 	public override void Update() {
 		EnsureValidRange();
 		base.Update();
-		slider.transform.parent.AsRect.pivot = new Vector2(0.5f, 0.8f);
 		label.GetComponent<AutoLocalizeTextUI>().RefreshTextFromLocalization();
 	}
 

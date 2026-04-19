@@ -118,18 +118,9 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 
 	Menu SatchelMenu {
 		get {
-			if (field == null) {
-				Element[] elements = [..
-					PassDefs.SelectMany(x => GenerateDetectorOptions(EdgeDetectionPass.Passes[x.Id]))
-				];
-				field = new(name: Inst.Name, elements);
-				field.OnReflow += FirstUpdate;
-
-				void FirstUpdate(object _, ReflowEventArgs a) {
-					foreach (var x in elements) x.Update();
-					field.OnReflow -= FirstUpdate;
-				}
-			}
+			field ??= new(name: Inst.Name, elements: [..
+				PassDefs.SelectMany(x => GenerateDetectorOptions(EdgeDetectionPass.Passes[x.Id]))
+			]);
 			return field;
 		}
 	}
