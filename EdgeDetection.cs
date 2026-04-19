@@ -45,9 +45,9 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 
 	public EdgeDetection() : base("Edge Detection") {
 		Inst = this;
-#if DEBUG
+		#if DEBUG
 		Log("--- This is a development build ---");
-#endif
+		#endif
 
 		Log("Loading assets...");
 		Utils.ReadAsset($"shader.bundle", stream => {
@@ -74,50 +74,39 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 
 		Log("Applying settings...");
 
-		if (EdgeDetectionPass.Passes.Count > 0) {
-			foreach (var (id, pass) in EdgeDetectionPass.Passes) {
-				if (settings.TryGetValue(id, out var s)) {
-					pass.LineColor = s.Colour;
-					pass.LineWidth = s.Width;
-					pass.HalfResolution = s.HalfRes;
-				}
+		foreach(var (id, passSettings) in settings) {
+			int i = Array.FindIndex(PassDefs, x => x.Id == id);
+			if (i >= 0) {
+				PassDefs[i] = PassDefs[i] with {
+					Colour = passSettings.Colour,
+					Width = passSettings.Width,
+					HalfRes = passSettings.HalfRes
+				};
 			}
-		} else {
-			for(int i = 0; i < PassDefs.Length; i++) {
-				if (settings.TryGetValue(PassDefs[i].Id, out var s)) {
-					PassDefs[i] = PassDefs[i] with {
-						Colour = s.Colour,
-						Width = s.Width,
-						HalfRes = s.HalfRes
-					};
-				}
+			else
+				LogError($"Failed to apply settings to {id} pass");
+
+			if (EdgeDetectionPass.Passes.TryGetValue(id, out var component)) {
+				component.LineColor = passSettings.Colour;
+				component.LineWidth = passSettings.Width;
+				component.HalfResolution = passSettings.HalfRes;
 			}
 		}
+
 	}
 
 	public Dictionary<string, PassSettings> OnSaveGlobal() {
 		Dictionary<string, PassSettings> settings = [];
-		if (EdgeDetectionPass.Passes.Count > 0) {
-			foreach(var (id, pass) in EdgeDetectionPass.Passes)
-				settings[id] = new() {
-					Colour = pass.LineColor,
-					Width = pass.LineWidth,
-					HalfRes = pass.HalfResolution
-				};
-		}
-		else {
-			foreach (var pass in PassDefs)
-				settings[pass.Id] = new() {
-					Colour = pass.Colour,
-					Width = pass.Width,
-					HalfRes = pass.HalfRes
-				};
-		}
+		foreach (var pass in PassDefs)
+			settings[pass.Id] = new() {
+				Colour = pass.Colour,
+				Width = pass.Width,
+				HalfRes = pass.HalfRes
+			};
 		return settings;
 	}
 
 	#endregion
-
 	#region Menu
 
 	public bool ToggleButtonInsideMenu => false;
@@ -149,17 +138,25 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 	/// Menu options for an <see cref="EdgeDetectionPass"/>.
 	/// </summary>
 	static IEnumerable<Element> GenerateDetectorOptions(EdgeDetectionPass pass) {
+		int i = Array.FindIndex(PassDefs, x => x.Id == pass.Id);
+
 		HeaderPanel title = new($"{pass.Id}_NAME");
 
 		HexColorInput colour = new(
 			"LINE_COLOUR_LABEL",
-			storeVal: value => pass.LineColor = value,
+			storeVal: value => {
+				pass.LineColor = value;
+				PassDefs[i] = PassDefs[i] with { Colour = value };
+			},
 			loadVal: () => pass.LineColor
 		);
 
 		ByteSlider width = new(
 			"LINE_WIDTH_LABEL",
-			storeVal: value => pass.LineWidth = value,
+			storeVal: value => {
+				pass.LineWidth = value;
+				PassDefs[i] = PassDefs[i] with { Width = value };
+			},
 			loadVal: () => pass.LineWidth,
 			min: EdgeDetectionPass.WIDTH_MIN,
 			max: EdgeDetectionPass.WIDTH_MAX
@@ -168,7 +165,10 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 		BoolOption halfRes = new(
 			"HALF_RES_LABEL",
 			"HALF_RES_DESC",
-			storeVal: value => pass.HalfResolution = value,
+			storeVal: value => {
+				pass.HalfResolution = value;
+				PassDefs[i] = PassDefs[i] with { HalfRes = value };
+			},
 			loadVal: () => pass.HalfResolution
 		);
 
