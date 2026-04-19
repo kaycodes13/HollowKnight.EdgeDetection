@@ -191,7 +191,7 @@ public class EdgeDetectionPass : MonoBehaviour {
 		detectorCam.backgroundColor = Color.clear;
 		detectorCam.cullingMask = layerMask;
 
-		if (HeroController.instance) {
+		if (HeroController.SilentInstance) {
 			float z = HeroController.instance.transform.position.z - detectorCam.transform.position.z;
 			detectorCam.farClipPlane = z + ClipFar;
 			detectorCam.nearClipPlane = z - ClipNear;

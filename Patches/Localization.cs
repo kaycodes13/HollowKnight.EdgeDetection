@@ -15,7 +15,7 @@ namespace EdgeDetection.Patches;
 internal static class Localization {
 
 	internal static void Patch() {
-		ModHooks.LanguageGetHook += LanguageGetHook;
+		On.Language.Language.Get_string_string += LanguageGetHook;
 		UIManager.EditMenus += FixMenuLocalizationHook;
 	}
 
@@ -44,11 +44,12 @@ internal static class Localization {
 
 	/// <summary>
 	/// Fakes this mod having its own language sheet.
+	/// Doing this with an On hook instead of a ModHooks hook to prevent constant warnings in Player.log.
 	/// </summary>
-	private static string LanguageGetHook(string key, string sheetTitle, string orig) {
+	private static string LanguageGetHook(On.Language.Language.orig_Get_string_string orig, string key, string sheetTitle) {
 		if (sheetTitle == SHEET)
 			return Localized(key);
-		return orig;
+		return orig(key, sheetTitle);
 	}
 
 	/// <summary>

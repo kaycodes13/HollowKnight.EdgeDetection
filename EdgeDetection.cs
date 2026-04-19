@@ -46,7 +46,7 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 	public EdgeDetection() : base("Edge Detection") {
 		Inst = this;
 #if DEBUG
-		Log("--- This is a local build ---");
+		Log("--- This is a development build ---");
 #endif
 
 		Log("Loading assets...");
@@ -137,8 +137,7 @@ public class EdgeDetection : Mod, IGlobalSettings<Dictionary<string, PassSetting
 				field.OnReflow += FirstUpdate;
 
 				void FirstUpdate(object _, ReflowEventArgs a) {
-					foreach (var elem in elements)
-						elem.Update();
+					foreach (var x in elements) x.Update();
 					field.OnReflow -= FirstUpdate;
 				}
 			}
