@@ -12,6 +12,7 @@ internal static class ApplyObjectMods {
 	internal static void Patch() {
 		On.GameCameras.Start += SceneParticlesHook;
 		On.HeroController.Awake += HeroAwakeHook;
+		On.HutongGames.PlayMaker.Actions.CreateObject.OnEnter += FsmCreateObjectHook;
 		ModHooks.ObjectPoolSpawnHook += ObjectSpawnHook;
 		USceneManager.activeSceneChanged += SceneChangedHook;
 		USceneManager.sceneLoaded += SceneLoadedHook;
@@ -21,16 +22,13 @@ internal static class ApplyObjectMods {
 
 	private static void SceneParticlesHook(On.GameCameras.orig_Start orig, GameCameras self) {
 		orig(self);
-
 		foreach (Transform t in Utils.WalkHierarchy(self.sceneParticles.gameObject))
 			t.gameObject.layer = ObjectMods.HIDE_LAYER_INT;
 	}
 
 	static void HeroAwakeHook(On.HeroController.orig_Awake orig, HeroController self) {
 		orig(self);
-
 		ObjectMods ghostMods = Utils.ReadJsonAsset<ObjectMods>("ghost_modifications.json");
-
 		foreach (Transform t in Utils.WalkHierarchy(self.gameObject)) {
 			HideParticles(t);
 			ghostMods.Apply(t);
@@ -47,19 +45,32 @@ internal static class ApplyObjectMods {
 		return result;
 	}
 
+	private static void FsmCreateObjectHook(
+		On.HutongGames.PlayMaker.Actions.CreateObject.orig_OnEnter orig,
+		HutongGames.PlayMaker.Actions.CreateObject self
+	) {
+		if (self.gameObject.Value) {
+			foreach (Transform t in Utils.SelfAndWalkHierarchy(self.gameObject.Value)) {
+				if (ObjectVisualizer.IsVisualizer(t))
+					continue;
+				HideParticles(t);
+				genericMods.Apply(t);
+			}
+		}
+		orig(self);
+	}
+
 	static void SceneChangedHook(Scene _, Scene to) => SceneHandler(to);
 	static void SceneLoadedHook(Scene to, LoadSceneMode mode) => SceneHandler(to);
 	static void SceneHandler(Scene scene) {
-		if (!GameManager.instance)
-			return;
+		if (GameManager.instance)
+			GameManager.instance.StartCoroutine(Coro());
 
-		GameManager.instance.StartCoroutine(Coro(scene));
-
-		static IEnumerator Coro(Scene scn) {
+		IEnumerator Coro() {
 			for (int i = 0; i < 2; i++) yield return null;
-			if (!scn.isLoaded) yield break;
+			if (!scene.isLoaded) yield break;
 
-			foreach (Transform t in Utils.WalkHierarchy(scn.GetRootGameObjects())) {
+			foreach (Transform t in Utils.WalkHierarchy(scene.GetRootGameObjects())) {
 				if (ObjectVisualizer.IsVisualizer(t))
 					continue;
 				HideParticles(t);
