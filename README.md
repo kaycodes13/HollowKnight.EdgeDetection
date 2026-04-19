@@ -12,7 +12,10 @@ Donation Link: https://ko-fi.com/kaykao
 
 ## Installation
 
-Install with [Lumafly mod manager](https://themulhima.github.io/Lumafly/). This mod's one dependency, [Satchel](https://github.com/TheMulhima/Satchel/), should be installed automatically.
+Install with [Lumafly mod manager](https://themulhima.github.io/Lumafly/). This mod's dependencies will be installed automatically.
+
+For manual installation, place the `.zip` file in the `Managed/Mods` directory for your Hollow Knight install and extract it. You'll also have to manually install:
+* [Satchel](https://github.com/TheMulhima/Satchel/releases/latest)
 
 ## Special Thanks to...
 
@@ -21,3 +24,4 @@ Install with [Lumafly mod manager](https://themulhima.github.io/Lumafly/). This 
 * Lux and Jusiv for the moral support and links to shader resources
 * Praion for the German localization
 * TS_Terrapin for the Korean localization
+* Wangha for the French localization
