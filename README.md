@@ -8,7 +8,7 @@ Each layer can have its line thickness and colour changed individually. The line
 
 Many regular rooms have been tested and the entire game should be playable, but I still have refinements to make. If you find a particular room, object, or boss that looks wrong, please [open an issue on the GitHub repository](https://github.com/kaycodes13/HollowKnight.EdgeDetection/issues/new/choose).
 
-*Donation Link: https://ko-fi.com/kaykao*
+Donation Link: https://ko-fi.com/kaykao
 
 ## Installation
 
