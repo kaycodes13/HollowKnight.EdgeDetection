@@ -47,15 +47,19 @@
 	<!-- Modding API & Game References -->
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Unity.Analyzers" Version="1.26.0" PrivateAssets="all" />
-
-		<Reference
-			Include="$(HollowKnightRefs)/*.dll"
-			Exclude="$(HollowKnightRefs)/mscorlib.dll;$(HollowKnightRefs)/unityscenerepacker.dll;$(HollowKnightRefs)/XGamingRuntime.dll;$(HollowKnightRefs)/System*.dll"
-			Private="false" />
 		
 		<!-- Accessing internals without reflection. https://github.com/BepInEx/BepInEx.AssemblyPublicizer -->
 		<PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all" />
-		<Reference Private="false" Publicize="true" Include="$(HollowKnightRefs)/Assembly-CSharp.dll" />
+
+		<Reference
+			Include="$(HollowKnightRefs)/Assembly*.dll;$(HollowKnightRefs)/Unity*.dll"
+			Exclude="$(HollowKnightRefs)/unityscenerepacker.dll"
+			Private="false"
+			Publicize="true" />
+		<Reference
+			Include="$(HollowKnightRefs)/Mono*.dll;$(HollowKnightRefs)/MMHOOK*.dll;$(HollowKnightRefs)/GalaxyCSharp.dll;$(HollowKnightRefs)/netstandard.dll;$(HollowKnightRefs)/Newtonsoft.Json.dll;$(HollowKnightRefs)/PlayMaker.dll"
+			Private="false"
+			Publicize="false" />
 		
 		<Reference Include="System.ComponentModel.Composition">
 			<HintPath>$(HollowKnightRefs)/System.ComponentModel.Composition.dll</HintPath>
