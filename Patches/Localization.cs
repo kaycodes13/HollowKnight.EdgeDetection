@@ -16,7 +16,7 @@ internal static class Localization {
 
 	internal static void Patch() {
 		On.Language.Language.Get_string_string += LanguageGetHook;
-		UIManager.EditMenus += FixMenuLocalizationHook;
+		On.UIManager.GoToOptionsMenu += FixMenuLocalizationHook;
 	}
 
 	#region API
@@ -56,35 +56,38 @@ internal static class Localization {
 	/// Fixes this mod's title and back button not being properly localized.
 	/// Also fixes the Mods menu's back button.
 	/// </summary>
-	private static void FixMenuLocalizationHook() {
-		UIManager.instance.StartCoroutine(Coro());
+	private static IEnumerator FixMenuLocalizationHook(On.UIManager.orig_GoToOptionsMenu orig, UIManager self) {
+		var uiCanvas = self.UICanvas.transform;
 
-		IEnumerator Coro() {
-			yield return null;
-			var uiCanvas = UIManager.instance.UICanvas.transform;
+		// The Mods menu's own Back button :|
+		var mainBackBtn = uiCanvas.Find("ModListMenu/Control/BackButton/Label");
+		if (mainBackBtn)
+			AutoLocalize(mainBackBtn.gameObject, "MainMenu", "NAV_BACK");
+		else
+			Inst.Log("Couldn't find Mods menu's back button.");
 
-			// The Mods menu's own Back button :|
-			AutoLocalize(
-				uiCanvas.Find("ModListMenu/Control/BackButton/Label").gameObject,
-				"MainMenu", "NAV_BACK"
-			);
+		// This mod's open-menu button
+		var modBtn = uiCanvas.Find($"ModListMenu/Content/ScrollMask/ScrollingPane/{Inst.Name}_Settings/Label");
+		if (modBtn)
+			AutoLocalize(modBtn.gameObject, "MOD_TITLE");
+		else
+			Inst.Log("Couldn't find this mod's button on the Mods menu.");
 
-			// This mod's open-menu button
-			AutoLocalize(
-				uiCanvas.Find($"ModListMenu/Content/ScrollMask/ScrollingPane/{Inst.Name}_Settings/Label").gameObject,
-				"MOD_TITLE"
-			);
+		// This mod's title
+		var modTitle = uiCanvas.Find($"{Inst.Name}/Title");
+		if (modTitle)
+			AutoLocalize(modTitle.gameObject, "MOD_TITLE");
+		else
+			Inst.Log("Couldn't find own menu title.");
 
-			// This mod's title and back button
-			AutoLocalize(
-				uiCanvas.Find($"{Inst.Name}/Title").gameObject,
-				"MOD_TITLE"
-			);
-			AutoLocalize(
-				uiCanvas.Find($"{Inst.Name}/Control/BackButton/Label").gameObject,
-				"MainMenu", "NAV_BACK"
-			);
-		}
+		// This mod's back button
+		var modBackBtn = uiCanvas.Find($"{Inst.Name}/Control/BackButton/Label");
+		if (modBackBtn)
+			AutoLocalize(modBackBtn.gameObject, "MainMenu", "NAV_BACK");
+		else
+			Inst.Log("Couldn't find own back button.");
+
+		return orig(self);
 	}
 
 	#endregion
