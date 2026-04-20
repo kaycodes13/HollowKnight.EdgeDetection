@@ -27,3 +27,5 @@ For manual installation, place the `.zip` file in the `Managed/Mods` directory f
 * TS_Terrapin for the Korean localization
 * Wangha for the French localization
 * Lonk for the Spanish localization
+* Manno Stone for the Brazilian Portugese localization
+* 明朝萧关客 (shownyoung) for the Simplified Chinese localization
