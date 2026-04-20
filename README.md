@@ -1,4 +1,5 @@
 ﻿# Edge Detection
+![Build Status](https://img.shields.io/github/actions/workflow/status/kaycodes13/HollowKnight.EdgeDetection/build.yml) ![Downloads](https://img.shields.io/github/downloads/kaycodes13/HollowKnight.EdgeDetection/total?color=blue)
 
 An accessibility mod for Hollow Knight that adds customizable edge detection to things that are important for gameplay.
 
