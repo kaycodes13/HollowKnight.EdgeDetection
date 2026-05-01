@@ -64,28 +64,28 @@ internal static class Localization {
 		if (mainBackBtn)
 			AutoLocalize(mainBackBtn.gameObject, "MainMenu", "NAV_BACK");
 		else
-			Inst.Log("Couldn't find Mods menu's back button.");
+			Inst.LogError("Couldn't find Mods menu's back button.");
 
 		// This mod's open-menu button
 		var modBtn = uiCanvas.Find($"ModListMenu/Content/ScrollMask/ScrollingPane/{Inst.Name}_Settings/Label");
 		if (modBtn)
-			AutoLocalize(modBtn.gameObject, "MOD_TITLE");
+			AutoLocalize(modBtn.gameObject, "EDGE_DETECTION");
 		else
-			Inst.Log("Couldn't find this mod's button on the Mods menu.");
+			Inst.LogError("Couldn't find this mod's button on the Mods menu.");
 
 		// This mod's title
 		var modTitle = uiCanvas.Find($"{Inst.Name}/Title");
 		if (modTitle)
-			AutoLocalize(modTitle.gameObject, "MOD_TITLE");
+			AutoLocalize(modTitle.gameObject, "EDGE_DETECTION");
 		else
-			Inst.Log("Couldn't find own menu title.");
+			Inst.LogError("Couldn't find own menu title.");
 
 		// This mod's back button
 		var modBackBtn = uiCanvas.Find($"{Inst.Name}/Control/BackButton/Label");
 		if (modBackBtn)
 			AutoLocalize(modBackBtn.gameObject, "MainMenu", "NAV_BACK");
 		else
-			Inst.Log("Couldn't find own back button.");
+			Inst.LogError("Couldn't find own back button.");
 
 		return orig(self);
 	}

@@ -1,5 +1,8 @@
 # Edge Detection - Changelog
 
+## 1.0.2.0
+* Added Japanese, Russian, and Italian localization
+
 ## 1.0.1.0
 * Fixed a bug that sometimes prevented settings from saving correctly
 * Visual improvements for boss death effects and other particles
